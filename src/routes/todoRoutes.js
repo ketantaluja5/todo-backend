@@ -1,4 +1,5 @@
 const express = require("express");
+const { authenticateUser } = require("../middlewares/authMiddleware");
 const router = express.Router();
 const {
   createTodo,
@@ -7,6 +8,9 @@ const {
   getTodos,
   getTodoById,
 } = require("../controllers/todoController");
+
+//protect all routes
+router.use(authenticateUser);
 
 //create a new todo
 router.post("/", async (req, res) => {
